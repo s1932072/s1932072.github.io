@@ -8,40 +8,65 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 </head>
 <body>
-    <div id="languageSelector">
-        <select id="language">
-            <option value="ja">日本語</option>
-            <option value="en">English</option>
-        </select>
-    </div>
+    <div class="background-overlay"></div>
+    <div class="container">
+        <aside class="sidebar left-sidebar">
+            <div class="sidebar-content">
+                <h3>最近の活動</h3>
+                <ul id="recentActivities"></ul>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div id="languageSelector">
+                <select id="language">
+                    <option value="ja">日本語</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
 
-    <header>
-        <img src="/api/placeholder/800/200" alt="ヘッダー画像" />
-        <h1></h1>
-    </header>
+            <header>
+                <img src="/api/placeholder/800/200" alt="ヘッダー画像" class="header-image" />
+                <h1></h1>
+            </header>
 
-    <table></table>
+            <table></table>
 
-    <h2 data-translate="skillset"></h2>
-    <div id="chartTypeSelector">
-        <select id="chartType">
-            <option value="horizontalBar"></option>
-            <option value="bar"></option>
-            <option value="pie"></option>
-        </select>
-    </div>
-    <div id="skillMetricSelector">
-        <select id="skillMetric">
-            <option value="years"></option>
-            <option value="projects"></option>
-        </select>
-    </div>
-    <div class="chart-container">
-        <canvas id="skillChart"></canvas>
-    </div>
+            <h2 data-translate="skillset"></h2>
+            <div class="chart-controls">
+                <div id="chartTypeSelector">
+                    <select id="chartType">
+                        <option value="horizontalBar"></option>
+                        <option value="bar"></option>
+                        <option value="pie"></option>
+                    </select>
+                </div>
+                <div id="skillMetricSelector">
+                    <select id="skillMetric">
+                        <option value="years"></option>
+                        <option value="projects"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="skillChart"></canvas>
+            </div>
 
-    <h2 data-translate="learningTech"></h2>
-    <ul></ul>
+            <h2 data-translate="learningTech"></h2>
+            <ul id="learningTechList"></ul>
+        </main>
+
+        <aside class="sidebar right-sidebar">
+            <div class="sidebar-content">
+                <h3>お問い合わせ</h3>
+                <form id="contactForm">
+                    <input type="email" placeholder="メールアドレス" required>
+                    <textarea placeholder="メッセージ" required></textarea>
+                    <button type="submit">送信</button>
+                </form>
+            </div>
+        </aside>
+    </div>
 
     <script src="script.js"></script>
 </body>
