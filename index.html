@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エンジニア自己紹介</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+    <div id="languageSelector">
+        <select id="language" onchange="updateContent()">
+            <option value="ja">日本語</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+
+    <header>
+        <img src="/api/placeholder/800/200" alt="ヘッダー画像" />
+        <h1 data-translate="title">エンジニア自己紹介</h1>
+    </header>
+
+    <table>
+        <tr>
+            <th data-translate="name">名前</th>
+            <td>山田 太郎</td>
+        </tr>
+        <tr>
+            <th data-translate="age">年齢</th>
+            <td>30歳</td>
+        </tr>
+        <tr>
+            <th data-translate="occupation">職業</th>
+            <td data-translate="occupationValue">ソフトウェアエンジニア</td>
+        </tr>
+        <tr>
+            <th data-translate="hobbies">趣味</th>
+            <td data-translate="hobbiesValue">オープンソースプロジェクトへの貢献、テックカンファレンス参加、ガジェット収集</td>
+        </tr>
+        <tr>
+            <th data-translate="selfPR">自己PR</th>
+            <td data-translate="selfPRValue">新技術の習得に熱心で、チーム内での知識共有を大切にしています。効率的なコード作成とユーザー体験の向上を常に意識しています。</td>
+        </tr>
+    </table>
+
+    <h2 data-translate="skillset">スキルセット</h2>
+    <div id="chartTypeSelector">
+        <select id="chartType" onchange="updateChart()">
+            <option value="bar" data-translate="verticalBar">縦棒グラフ</option>
+            <option value="horizontalBar" data-translate="horizontalBar">横棒グラフ</option>
+            <option value="pie" data-translate="pieChart">円グラフ</option>
+        </select>
+    </div>
+    <div id="skillMetricSelector">
+        <select id="skillMetric" onchange="updateChart()">
+            <option value="years" data-translate="yearsOfExperience">経験年数</option>
+            <option value="projects" data-translate="projectExperience">プロジェクト経験</option>
+        </select>
+    </div>
+    <div class="chart-container">
+        <canvas id="skillChart"></canvas>
+    </div>
+
+    <h2 data-translate="learningTech">現在学習中の技術</h2>
+    <ul>
+        <li data-translate="tech1">Rust言語</li>
+        <li data-translate="tech2">Kubernetesオーケストレーション</li>
+        <li data-translate="tech3">機械学習アルゴリズム</li>
+    </ul>
+
+    <script src="script.js"></script>
+</body>
+</html>
