@@ -1,54 +1,47 @@
-// コンテンツデータ
-const content = {
+const translations = {
     ja: {
         title: "エンジニア自己紹介",
-        personalInfo: [
-            { key: "名前", value: "山田 太郎" },
-            { key: "年齢", value: "30歳" },
-            { key: "職業", value: "ソフトウェアエンジニア" },
-            { key: "趣味", value: "オープンソースプロジェクトへの貢献、テックカンファレンス参加、ガジェット収集" },
-            { key: "自己PR", value: "新技術の習得に熱心で、チーム内での知識共有を大切にしています。効率的なコード作成とユーザー体験の向上を常に意識しています。" }
-        ],
+        name: "名前",
+        age: "年齢",
+        occupation: "職業",
+        occupationValue: "ソフトウェアエンジニア",
+        hobbies: "趣味",
+        hobbiesValue: "オープンソースプロジェクトへの貢献、テックカンファレンス参加、ガジェット収集",
+        selfPR: "自己PR",
+        selfPRValue: "新技術の習得に熱心で、チーム内での知識共有を大切にしています。効率的なコード作成とユーザー体験の向上を常に意識しています。",
         skillset: "スキルセット",
         learningTech: "現在学習中の技術",
-        currentlyLearning: [
-            "Rust言語",
-            "Kubernetesオーケストレーション",
-            "機械学習アルゴリズム"
-        ],
-        chartLabels: {
-            skillLevel: "スキルレベル",
-            yearsOfExperience: "経験年数",
-            projectExperience: "プロジェクト経験",
-            verticalBar: "縦棒グラフ",
-            horizontalBar: "横棒グラフ",
-            pieChart: "円グラフ"
-        }
+        tech1: "Rust言語",
+        tech2: "Kubernetesオーケストレーション",
+        tech3: "機械学習アルゴリズム",
+        skillLevel: "スキルレベル",
+        yearsOfExperience: "経験年数",
+        projectExperience: "プロジェクト経験",
+        verticalBar: "縦棒グラフ",
+        horizontalBar: "横棒グラフ",
+        pieChart: "円グラフ"
     },
     en: {
         title: "Software Engineer Introduction",
-        personalInfo: [
-            { key: "Name", value: "Taro Yamada" },
-            { key: "Age", value: "30 years old" },
-            { key: "Occupation", value: "Software Engineer" },
-            { key: "Hobbies", value: "Contributing to open-source projects, attending tech conferences, collecting gadgets" },
-            { key: "Self PR", value: "I'm passionate about learning new technologies and value knowledge sharing within the team. I always focus on efficient coding and improving user experience." }
-        ],
+        name: "Name",
+        age: "Age",
+        occupation: "Occupation",
+        occupationValue: "Software Engineer",
+        hobbies: "Hobbies",
+        hobbiesValue: "Contributing to open-source projects, attending tech conferences, collecting gadgets",
+        selfPR: "Self PR",
+        selfPRValue: "I'm passionate about learning new technologies and value knowledge sharing within the team. I always focus on efficient coding and improving user experience.",
         skillset: "Skill Set",
         learningTech: "Currently Learning",
-        currentlyLearning: [
-            "Rust programming language",
-            "Kubernetes orchestration",
-            "Machine learning algorithms"
-        ],
-        chartLabels: {
-            skillLevel: "Skill Level",
-            yearsOfExperience: "Years of Experience",
-            projectExperience: "Project Experience",
-            verticalBar: "Vertical Bar",
-            horizontalBar: "Horizontal Bar",
-            pieChart: "Pie Chart"
-        }
+        tech1: "Rust programming language",
+        tech2: "Kubernetes orchestration",
+        tech3: "Machine learning algorithms",
+        skillLevel: "Skill Level",
+        yearsOfExperience: "Years of Experience",
+        projectExperience: "Project Experience",
+        verticalBar: "Vertical Bar",
+        horizontalBar: "Horizontal Bar",
+        pieChart: "Pie Chart"
     }
 };
 
@@ -67,40 +60,9 @@ const skillData = {
 
 function updateContent() {
     const lang = document.getElementById("language").value;
-    const currentContent = content[lang];
-
-    document.title = currentContent.title;
-    document.querySelector("h1").textContent = currentContent.title;
-
-    const table = document.querySelector("table");
-    table.innerHTML = "";
-    currentContent.personalInfo.forEach(item => {
-        const row = table.insertRow();
-        const keyCell = row.insertCell(0);
-        const valueCell = row.insertCell(1);
-        keyCell.textContent = item.key;
-        valueCell.textContent = item.value;
+    document.querySelectorAll("[data-translate]").forEach(elem => {
+        elem.textContent = translations[lang][elem.getAttribute("data-translate")];
     });
-
-    document.querySelector("h2[data-translate='skillset']").textContent = currentContent.skillset;
-    document.querySelector("h2[data-translate='learningTech']").textContent = currentContent.learningTech;
-
-    const learningList = document.querySelector("ul");
-    learningList.innerHTML = "";
-    currentContent.currentlyLearning.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        learningList.appendChild(li);
-    });
-
-    document.getElementById("chartType").querySelectorAll("option").forEach(option => {
-        option.textContent = currentContent.chartLabels[option.value];
-    });
-
-    document.getElementById("skillMetric").querySelectorAll("option").forEach(option => {
-        option.textContent = currentContent.chartLabels[option.value];
-    });
-
     updateChart();
 }
 
@@ -131,7 +93,7 @@ function updateChart() {
         data: {
             labels: skillData.labels,
             datasets: [{
-                label: content[lang].chartLabels.skillLevel,
+                label: translations[lang].skillLevel,
                 data: data,
                 backgroundColor: backgroundColor,
                 borderColor: backgroundColor.map(color => color.replace('0.6', '1')),
@@ -158,7 +120,7 @@ function updateChart() {
                     callbacks: {
                         label: function(context) {
                             if (skillMetric === 'years') {
-                                return `${context.parsed} ${content[lang].chartLabels.yearsOfExperience}`;
+                                return `${context.parsed} ${translations[lang].yearsOfExperience}`;
                             } else {
                                 return skillData.projects[context.dataIndex];
                             }
@@ -176,9 +138,4 @@ function updateChart() {
     chart = new Chart(ctx, config);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('language').addEventListener('change', updateContent);
-    document.getElementById('chartType').addEventListener('change', updateChart);
-    document.getElementById('skillMetric').addEventListener('change', updateChart);
-    updateContent();
-});
+updateContent();
